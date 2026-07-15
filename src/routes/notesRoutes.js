@@ -7,12 +7,12 @@ import {
   updateNote,
 } from '../controllers/notesController.js';
 
-const notesRouters = Router();
+const notesRouter = Router();
 
-notesRouters.get('/', getAllNotes);
-notesRouters.get('/:noteId', getNoteById);
-notesRouters.post('/', createNote);
-notesRouters.delete('/:noteId', deleteNote);
-notesRouters.patch('/:noteId', updateNote);
+notesRouter.get('/', getAllNotes);
+notesRouter.get('/:noteId', getNoteById);
+notesRouter.post('/', createNote);
+notesRouter.delete('/:noteId', deleteNote);
+notesRouter.patch('/:noteId', updateNote);
 
-export default notesRouters;
+export default notesRouter;
