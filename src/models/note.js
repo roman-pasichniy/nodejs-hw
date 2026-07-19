@@ -26,5 +26,5 @@ const noteSchema = new Schema(
 );
 
 noteSchema.index({ title: 'text', content: 'text' });
-const Note = model('note', noteSchema);
-export default Note;
+noteSchema.index({ tag: 1 });
+export const Note = model('note', noteSchema);
