@@ -29,7 +29,7 @@ const noteSchema = new Schema(
     versionKey: false,
   },
 );
-noteSchema.index({ title: 'text', content: 'text' });
+noteSchema.index({ tag: 1, userId: 1 });
 
 const Note = model('Note', noteSchema);
 
