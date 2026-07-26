@@ -93,20 +93,24 @@ export const requestResetEmail = async (req, res, next) => {
         .json({ message: 'Password reset email sent successfully' });
     }
 
-    const token = jwt.sign({ sub: user._id, email: user.email }, JWT_SECRET, {
-      expiresIn: '15m',
-    });
+    const resetToken = jwt.sign(
+      { sub: user._id, email: user.email },
+      process.env.JWT_SECRET,
+      {
+        expiresIn: '15m',
+      },
+    );
 
-    const resetLink = `${FRONTEND_DOMAIN}/reset-password?token=${token}`;
+    const resetLink = `${process.env.FRONTEND_DOMAIN}/reset-password?token=${resetToken}`;
 
     const templatePath = path.resolve(
       'src',
       'templates',
       'reset-password-email.html',
     );
-    const source = await fs.readFile(templatePath, 'utf8');
+    const templateSource = await fs.readFile(templatePath, 'utf8');
 
-    const template = handlebars.compile(source);
+    const template = handlebars.compile(templateSource);
 
     const html = template({
       username: user.username || 'користувач',
@@ -134,7 +138,7 @@ export const resetPassword = async (req, res, next) => {
 
     let decoded;
     try {
-      decoded = jwt.verify(token, JWT_SECRET);
+      decoded = jwt.verify(token, process.env.JWT_SECRET);
     } catch {
       throw createHttpError(401, 'Invalid or expired token');
     }
