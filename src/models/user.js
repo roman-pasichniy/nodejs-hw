@@ -18,6 +18,10 @@ const userSchema = new Schema(
       trim: true,
       minlength: 8,
     },
+    avatar: {
+      type: String,
+      default: 'https://ac.goit.global/fullstack/react/default-avatar.jpg',
+    },
   },
   { versionKey: false, timestamps: true },
 );
@@ -35,6 +39,4 @@ userSchema.pre('save', function (next) {
   next();
 });
 
-const User = model('User', userSchema);
-
-export default User;
+export const User = model('User', userSchema);
