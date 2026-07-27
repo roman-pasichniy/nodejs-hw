@@ -1,4 +1,4 @@
-import User from '../models/user.js';
+import { User } from '../models/user.js';
 import { Session } from '../models/session.js';
 
 import createHttpError from 'http-errors';
